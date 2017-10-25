@@ -1,10 +1,13 @@
 package com.febaisi.deezeralbumsfetch;
 
-import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,10 +35,24 @@ public class MainActivity extends AppCompatActivity {
 
     };
 
+    private void setupActionBar() {
+        ActionBar.LayoutParams lp1 = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
+        View customNav = LayoutInflater.from(this).inflate(R.layout.action_bar, null);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayUseLogoEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setCustomView(customNav, lp1);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setupActionBar();
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);

@@ -29,7 +29,10 @@ public class FetchAlbumsAsyncTask extends AsyncTask<Void, Void, Pair<Boolean, St
         Boolean success = false;
 
         try {
-            URL url = new URL("http://api.deezer.com/2.0/user/2529/albums");
+
+            //My personal Deezer user -- 694058411
+            //Test default user -- 2529
+            URL url = new URL("http://api.deezer.com/2.0/user/694058411/albums");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setConnectTimeout(5000);
             connection.setReadTimeout(5000);
@@ -41,6 +44,7 @@ public class FetchAlbumsAsyncTask extends AsyncTask<Void, Void, Pair<Boolean, St
                 result += line + "\n";
             }
             success = true;
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
             result = "MalformedURLException";
@@ -51,7 +55,6 @@ public class FetchAlbumsAsyncTask extends AsyncTask<Void, Void, Pair<Boolean, St
             e.printStackTrace();
             result = "IOException";
         }
-
 
         return new Pair<>(success, result);
     }

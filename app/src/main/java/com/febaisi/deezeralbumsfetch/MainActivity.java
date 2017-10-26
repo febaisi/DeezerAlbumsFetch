@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.febaisi.deezeralbumsfetch.controller.FetchAlbumsController;
 import com.febaisi.deezeralbumsfetch.fragments.AboutFragment;
 import com.febaisi.deezeralbumsfetch.fragments.AlbumsFragment;
 import com.febaisi.deezeralbumsfetch.fragments.ConfigFragment;
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setCustomView(customNav, lp1);
     }
 
-    private void manageFragment(Fragment fragment) {
+    protected void manageFragment(Fragment fragment) {
         if (findViewById(R.id.fragment_container) != null) {
 
             // Add the fragment to the 'fragment_container' FrameLayout

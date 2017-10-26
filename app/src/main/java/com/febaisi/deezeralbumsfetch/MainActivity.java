@@ -13,6 +13,8 @@ import android.view.View;
 import com.febaisi.deezeralbumsfetch.fragments.AboutFragment;
 import com.febaisi.deezeralbumsfetch.fragments.AlbumsFragment;
 import com.febaisi.deezeralbumsfetch.fragments.ConfigFragment;
+import com.febaisi.deezeralbumsfetch.fragments.CustomFragment;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,12 +50,15 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setCustomView(customNav, lp1);
     }
 
-    protected void manageFragment(Fragment fragment) {
+    protected void manageFragment(CustomFragment fragment) {
         if (findViewById(R.id.fragment_container) != null) {
 
-            // Add the fragment to the 'fragment_container' FrameLayout
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, fragment).commit();
+            //Prevent replace a fragment that is already on the top of the screen
+            if (getSupportFragmentManager().findFragmentByTag(fragment.getCustomTag()) == null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, fragment, fragment.getCustomTag()).commit();
+            }
+
         }
     }
 

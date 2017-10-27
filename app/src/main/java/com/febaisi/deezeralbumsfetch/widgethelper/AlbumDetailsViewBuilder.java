@@ -22,7 +22,7 @@ public class AlbumDetailsViewBuilder {
         }
 
         if (artistName != null && !artistName.isEmpty()) {
-            this.mArtistName = albumName;
+            this.mArtistName = artistName;
         } else {
             this.mArtistName = context.getResources().getString(R.string.default_artist_name);
         }

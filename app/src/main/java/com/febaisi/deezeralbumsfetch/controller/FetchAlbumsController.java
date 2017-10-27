@@ -18,12 +18,17 @@ public class FetchAlbumsController {
         this.mContext = context;
     }
 
-    public void fetchAlbums() {
-        new FetchAlbumsAsyncTask(mContext, new AlbumsFetchListener() {
+    public void fetchAlbums(final OrderedAlbumListRequestListener orderedAlbumListRequestListener) {
+        new FetchAlbumsAsyncTask(new AlbumsFetchListener() {
             @Override
             public void onAlbumsFetched(String albumsResult) {
                 try {
                     List<Album> albumsList = AlbumUtil.getAlbumsObjectList(albumsResult);
+
+                    if (orderedAlbumListRequestListener!=null) {
+                        orderedAlbumListRequestListener.onSuccess(albumsList);
+                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -31,8 +36,8 @@ public class FetchAlbumsController {
 
             @Override
             public void onAlbumsFetchFail(String failResult) {
-
             }
+
         }).execute();
     }
 

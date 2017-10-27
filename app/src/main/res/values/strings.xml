@@ -4,4 +4,6 @@
     <string name="title_albums">Albums</string>
     <string name="title_about">About</string>
     <string name="fetch_albums_fail">Uow!! :(\n We failed to fetch data!</string>
+    <string name="default_album_name">Album Name</string>
+    <string name="default_artist_name">Artist Name</string>
 </resources>

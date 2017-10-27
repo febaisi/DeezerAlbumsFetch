@@ -3,7 +3,6 @@ package com.febaisi.deezeralbumsfetch;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -17,6 +16,8 @@ import com.febaisi.deezeralbumsfetch.fragments.CustomFragment;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    public static String APP_TAG = "DeezerTest";
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -70,9 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-//        FetchAlbumsController fetchAlbumsController = new FetchAlbumsController(this);
-//        fetchAlbumsController.fetchAlbums();
 
         // If we're being restored from a previous state,
         // then we don't need to do anything and should return or else

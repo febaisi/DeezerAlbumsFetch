@@ -4,5 +4,6 @@
     <color name="colorPrimaryDark">#980110</color>
     <color name="colorAccent">#FF0000</color>
     <color name="colorTextLogo">#FFFFFF</color>
+    <color name="default_album_preview_color">#9E9E9E</color>
 
 </resources>

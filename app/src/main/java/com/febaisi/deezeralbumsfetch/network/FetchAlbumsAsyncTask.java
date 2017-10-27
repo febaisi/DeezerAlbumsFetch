@@ -1,8 +1,10 @@
 package com.febaisi.deezeralbumsfetch.network;
 
-import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.util.Pair;
+
+import com.febaisi.deezeralbumsfetch.MainActivity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,12 +16,10 @@ import java.net.URL;
 
 public class FetchAlbumsAsyncTask extends AsyncTask<Void, Void, Pair<Boolean, String>>  {
 
-    private Context mContext;
     private AlbumsFetchListener mAlbumsFetchListener;
 
-
-    public FetchAlbumsAsyncTask (Context context, AlbumsFetchListener  albumsFetchListener) {
-        this.mContext = context;
+    public FetchAlbumsAsyncTask (AlbumsFetchListener  albumsFetchListener) {
+        Log.i(MainActivity.APP_TAG, "Starting albums fetch.");
         this.mAlbumsFetchListener = albumsFetchListener;
     }
 
@@ -63,8 +63,10 @@ public class FetchAlbumsAsyncTask extends AsyncTask<Void, Void, Pair<Boolean, St
     protected void onPostExecute(Pair<Boolean, String> resultPair) {
         if (mAlbumsFetchListener != null) {
             if (resultPair.first.booleanValue()) {
+                Log.i(MainActivity.APP_TAG, "Albums fetch succeed.");
                 mAlbumsFetchListener.onAlbumsFetched(resultPair.second.toString());
             } else {
+                Log.e(MainActivity.APP_TAG, "Albums fetch failed.");
                 mAlbumsFetchListener.onAlbumsFetchFail(resultPair.second.toString());
             }
         }

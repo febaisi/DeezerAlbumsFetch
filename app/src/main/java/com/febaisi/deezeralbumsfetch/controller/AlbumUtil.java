@@ -45,6 +45,7 @@ public class AlbumUtil {
         album.setId(albumJsonObject.getInt("id"));
         album.setTitle(albumJsonObject.getString("title"));
         album.setLink(albumJsonObject.getString("link"));
+        album.setCover(albumJsonObject.getString("cover"));
         album.setCover_small(albumJsonObject.getString("cover_small"));
         album.setCover_medium(albumJsonObject.getString("cover_medium"));
         album.setCover_xl(albumJsonObject.getString("cover_xl"));

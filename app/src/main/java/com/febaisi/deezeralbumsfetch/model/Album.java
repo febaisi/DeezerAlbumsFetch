@@ -9,6 +9,7 @@ public class Album {
     private int id;
     private String title;
     private String link;
+    private String cover;
     private String cover_small;
     private String cover_medium;
     private String cover_xl;
@@ -39,6 +40,14 @@ public class Album {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 
     public String getCover_small() {

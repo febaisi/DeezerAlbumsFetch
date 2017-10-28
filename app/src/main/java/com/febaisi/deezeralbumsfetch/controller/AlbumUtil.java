@@ -1,7 +1,7 @@
 package com.febaisi.deezeralbumsfetch.controller;
 
-import com.febaisi.deezeralbumsfetch.objects.Album;
-import com.febaisi.deezeralbumsfetch.objects.Artist;
+import com.febaisi.deezeralbumsfetch.model.Album;
+import com.febaisi.deezeralbumsfetch.model.Artist;
 
 import org.json.JSONArray;
 import org.json.JSONException;

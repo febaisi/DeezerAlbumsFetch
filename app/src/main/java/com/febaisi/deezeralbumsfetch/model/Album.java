@@ -1,4 +1,4 @@
-package com.febaisi.deezeralbumsfetch.objects;
+package com.febaisi.deezeralbumsfetch.model;
 
 /**
  * Created by felipebaisi on 10/25/17.

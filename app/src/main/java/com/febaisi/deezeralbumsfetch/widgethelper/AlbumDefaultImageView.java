@@ -4,12 +4,14 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.support.v7.widget.AppCompatImageView;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.febaisi.deezeralbumsfetch.R;
 
-public class DownloaderImageView extends AppCompatImageView {
+public class AlbumDefaultImageView extends AppCompatImageView {
 
-    public DownloaderImageView(Context context) {
+    public AlbumDefaultImageView(Context context) {
         super(context);
         setImageResource(R.drawable.default_album_image);
     }

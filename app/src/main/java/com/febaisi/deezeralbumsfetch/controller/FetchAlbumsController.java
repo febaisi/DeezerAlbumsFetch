@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.febaisi.deezeralbumsfetch.network.AlbumsFetchListener;
 import com.febaisi.deezeralbumsfetch.network.FetchAlbumsAsyncTask;
-import com.febaisi.deezeralbumsfetch.objects.Album;
+import com.febaisi.deezeralbumsfetch.model.Album;
 
 import org.json.JSONException;
 

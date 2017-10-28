@@ -1,6 +1,6 @@
 package com.febaisi.deezeralbumsfetch.controller;
 
-import com.febaisi.deezeralbumsfetch.objects.Album;
+import com.febaisi.deezeralbumsfetch.model.Album;
 
 import java.util.List;
 

@@ -13,7 +13,10 @@ public class ConfigFragment extends CustomFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_config, container, false);
+        View view = inflater.inflate(R.layout.fragment_config, container, false);
+
+
+        return view;
     }
 
     @Override

@@ -13,7 +13,6 @@ public class AlbumDefaultImageView extends AppCompatImageView {
 
     public AlbumDefaultImageView(Context context) {
         super(context);
-        setImageResource(R.drawable.default_album_image);
     }
 
     @Override
@@ -21,7 +20,7 @@ public class AlbumDefaultImageView extends AppCompatImageView {
         super.onAttachedToWindow();
 
         // Default custom configs
-        setImageResource(R.drawable.default_album_image);
+        setImageResource(R.drawable.placeholder);
         setBackgroundColor(Color.LTGRAY);
 
         int imagePixels = getResources().getDimensionPixelSize(R.dimen.default_album_image_size);

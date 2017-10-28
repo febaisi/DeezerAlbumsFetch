@@ -25,16 +25,13 @@ public class CoverDownloaderImageView extends AppCompatImageView {
         downloadCover();
     }
 
+
     @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
 
         // Default custom configs
         setVisibility(View.INVISIBLE);
-
-        int imagePixels = getResources().getDimensionPixelSize(R.dimen.default_album_image_size);
-        getLayoutParams().height = imagePixels;
-        getLayoutParams().width = imagePixels;
     }
 
     private void downloadCover() {
@@ -53,7 +50,11 @@ public class CoverDownloaderImageView extends AppCompatImageView {
 
     private void setRealAlbumCover(final Drawable drawable) {
         setImageDrawable(drawable);
-        Animation fadeInAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in_animation);
+        int imagePixels = getResources().getDimensionPixelSize(R.dimen.default_album_image_size);
+        getLayoutParams().height = imagePixels;
+        getLayoutParams().width = imagePixels;
+
+        Animation fadeInAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.animation_fade_in);
         fadeInAnimation.setFillAfter(true);
         startAnimation(fadeInAnimation);
     }

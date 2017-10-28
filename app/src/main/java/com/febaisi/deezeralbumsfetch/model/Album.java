@@ -1,19 +1,16 @@
 package com.febaisi.deezeralbumsfetch.model;
 
-/**
- * Created by felipebaisi on 10/25/17.
- */
-
 public class Album {
 
     /**
      * Varibles were named following the API Json fields.
      * In the future we may use GSON to convert json data straight to Objects.
      */
-
     private int id;
     private String title;
     private String link;
+    private String cover_small;
+    private String cover_medium;
     private String cover_xl;
     private String release_date;
     private Artist artist;
@@ -42,6 +39,22 @@ public class Album {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public String getCover_small() {
+        return cover_small;
+    }
+
+    public void setCover_small(String cover_small) {
+        this.cover_small = cover_small;
+    }
+
+    public String getCover_medium() {
+        return cover_medium;
+    }
+
+    public void setCover_medium(String cover_medium) {
+        this.cover_medium = cover_medium;
     }
 
     public String getCover_xl() {

@@ -17,8 +17,8 @@ public class AlbumDefaultImageView extends AppCompatImageView {
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
 
         // Default custom configs
         setImageResource(R.drawable.default_album_image);

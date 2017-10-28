@@ -11,6 +11,7 @@ import com.febaisi.deezeralbumsfetch.R;
 import com.febaisi.deezeralbumsfetch.controller.FetchAlbumsController;
 import com.febaisi.deezeralbumsfetch.controller.OrderedAlbumListRequestListener;
 import com.febaisi.deezeralbumsfetch.model.Album;
+import com.febaisi.deezeralbumsfetch.widgethelper.AlbumCoverImageBuilder;
 import com.febaisi.deezeralbumsfetch.widgethelper.AlbumDetailsViewBuilder;
 import com.febaisi.deezeralbumsfetch.widgethelper.AlbumDefaultImageView;
 import com.febaisi.deezeralbumsfetch.widgethelper.WidgetUtil;
@@ -37,8 +38,10 @@ public class AlbumsFragment extends CustomFragment {
                 gridLayout.setColumnCount(2);
 
                 for (Album album : orderedAlbumList) {
-                    gridLayout.addView(new AlbumDefaultImageView(getActivity()), WidgetUtil.getGridNewRowParms(getActivity()));
-                    gridLayout.addView(new AlbumDetailsViewBuilder(getActivity(), album.getTitle(), album.getArtist().getName()).buildAlbumDetailsView());
+                    gridLayout.addView(new AlbumCoverImageBuilder(getContext(), album.getCover_medium()).buildAlbumCoverView(),
+                            WidgetUtil.getGridNewRowParms(getActivity()));
+                    gridLayout.addView(new AlbumDetailsViewBuilder(getActivity(),
+                            album.getTitle(), album.getArtist().getName()).buildAlbumDetailsView());
                 }
             }
 

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.febaisi.deezeralbumsfetch.cache.ImagesCache;
 import com.febaisi.deezeralbumsfetch.fragments.AboutFragment;
 import com.febaisi.deezeralbumsfetch.fragments.AlbumsFragment;
 import com.febaisi.deezeralbumsfetch.fragments.ConfigFragment;
@@ -71,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        //Initialize Cache
+        ImagesCache imagesCache = ImagesCache.getInstance();
+        imagesCache.initializeCache();
+
 
         // If we're being restored from a previous state,
         // then we don't need to do anything and should return or else

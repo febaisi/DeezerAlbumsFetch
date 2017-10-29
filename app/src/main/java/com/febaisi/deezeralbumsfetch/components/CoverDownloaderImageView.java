@@ -1,9 +1,10 @@
-package com.febaisi.deezeralbumsfetch.widgethelper;
+package com.febaisi.deezeralbumsfetch.components;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatImageView;
+import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -25,6 +26,11 @@ public class CoverDownloaderImageView extends AppCompatImageView {
         downloadCover();
     }
 
+
+    public CoverDownloaderImageView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        this.mContext = context;
+    }
 
     @Override
     protected void onAttachedToWindow() {
@@ -50,13 +56,18 @@ public class CoverDownloaderImageView extends AppCompatImageView {
 
     private void setRealAlbumCover(final Drawable drawable) {
         setImageDrawable(drawable);
-        int imagePixels = getResources().getDimensionPixelSize(R.dimen.default_album_image_size);
+        int imagePixels = getResources().getDimensionPixelSize(R.dimen.album_image_size);
         getLayoutParams().height = imagePixels;
         getLayoutParams().width = imagePixels;
 
         Animation fadeInAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.animation_fade_in);
         fadeInAnimation.setFillAfter(true);
         startAnimation(fadeInAnimation);
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.mImageUrl = imageUrl;
+        downloadCover();
     }
 
 }

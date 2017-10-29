@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/album_row_height"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center_vertical">
+
+    <RelativeLayout
+        android:layout_width="@dimen/album_image_size"
+        android:layout_height="@dimen/album_image_size"
+        android:layout_marginLeft="@dimen/margin_album_row_left_right">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/placeholder"/>
+
+        <com.febaisi.deezeralbumsfetch.components.CoverDownloaderImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/album_row_cover_image"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_image_size"
+        android:layout_marginLeft="@dimen/margin_between_tvs_cover"
+        android:orientation="vertical"
+        android:layout_marginRight="@dimen/margin_album_row_left_right"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/album_row_album_title"
+            android:text="@string/default_album_name"
+            android:textStyle="bold"
+            android:padding="@dimen/padding_album_details_tv"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/album_row_artist_title"
+            android:text="@string/default_artist_name"
+            android:padding="@dimen/padding_album_details_tv"/>
+
+    </LinearLayout>
+
+</LinearLayout>

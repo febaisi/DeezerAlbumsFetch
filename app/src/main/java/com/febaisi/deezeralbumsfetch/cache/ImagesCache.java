@@ -8,6 +8,10 @@ public class ImagesCache {
     private  LruCache<String, Bitmap> mMemoryCache;
     private static ImagesCache imagesCache;
 
+    protected ImagesCache() {
+        // Exists only to defeat instantiation.
+    }
+
     /**
      * Using imagesCache as a Singleton class
      * @return ImagesCache object

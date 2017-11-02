@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -12,6 +13,9 @@ import android.view.animation.AnimationUtils;
 import com.febaisi.deezeralbumsfetch.R;
 import com.febaisi.deezeralbumsfetch.network.DownloadCoverImageTask;
 import com.febaisi.deezeralbumsfetch.network.ImageDownloadListener;
+import com.febaisi.deezeralbumsfetch.network.threadpoolmanagement.DefaultExecutorSupplier;
+import com.febaisi.deezeralbumsfetch.network.threadpoolmanagement.Priority;
+import com.febaisi.deezeralbumsfetch.network.threadpoolmanagement.PriorityRunnable;
 
 
 public class CoverDownloaderImageView extends AppCompatImageView {
@@ -38,6 +42,7 @@ public class CoverDownloaderImageView extends AppCompatImageView {
 
         // Default custom configs
         setVisibility(View.INVISIBLE);
+
     }
 
     private void downloadCover() {
@@ -52,6 +57,20 @@ public class CoverDownloaderImageView extends AppCompatImageView {
 
             }
         }).execute();
+
+        DefaultExecutorSupplier.getInstance().forBackgroundTasks()
+                .submit(new PriorityRunnable(Priority.MEDIUM) {
+                    @Override
+                    public void run() {
+                        // do some background work here at high priority.
+                        try {
+                            Log.e( "baisi", "fetching album ");
+                            Thread.sleep(5000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
     }
 
     private void setRealAlbumCover(final Drawable drawable) {

@@ -7,4 +7,8 @@
     <string name="default_album_name">Album Name</string>
     <string name="default_artist_name">Artist Name</string>
     <string name="cover_fetch_fail">Uops! We failed to fetch the album cover!</string>
+    <string name="internet_slow">Internet slow (images)</string>
+    <string name="delete_cache">Wipe cache</string>
+    <string name="wipe">Wipe</string>
+    <string name="enable">Enable</string>
 </resources>

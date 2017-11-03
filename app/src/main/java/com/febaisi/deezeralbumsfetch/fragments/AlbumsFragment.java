@@ -11,6 +11,7 @@ import com.febaisi.deezeralbumsfetch.R;
 import com.febaisi.deezeralbumsfetch.controller.FetchAlbumsController;
 import com.febaisi.deezeralbumsfetch.controller.OrderedAlbumListRequestListener;
 import com.febaisi.deezeralbumsfetch.model.Album;
+import com.febaisi.deezeralbumsfetch.network.threadpoolmanagement.DefaultExecutorSupplier;
 import com.febaisi.deezeralbumsfetch.widgethelper.AlbumRowBuilder;
 
 import java.util.List;
@@ -25,6 +26,9 @@ public class AlbumsFragment extends CustomFragment {
         final View view = inflater.inflate(R.layout.fragment_albums, container, false);
         final ProgressBar progressBar = view.findViewById(R.id.album_load_spinner);
         final GridLayout gridLayout = view.findViewById(R.id.album_grid_layout);
+
+        //Restarting the process. Remove all pending tasks
+        DefaultExecutorSupplier.getInstance().getNetworkThreadPoolExecutor().purge();
 
         FetchAlbumsController fetchAlbumsController = new FetchAlbumsController(getActivity());
         fetchAlbumsController.fetchAlbums(new OrderedAlbumListRequestListener() {

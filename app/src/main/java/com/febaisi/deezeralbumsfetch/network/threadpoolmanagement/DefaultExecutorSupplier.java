@@ -27,7 +27,7 @@ public class DefaultExecutorSupplier{
 
         mNetworkThreadPoolExecutor = new PriorityThreadPoolExecutor(
                 NUMBER_OF_CORES,
-                NUMBER_OF_CORES * 2,
+                NUMBER_OF_CORES * 3,
                 120L,
                 TimeUnit.SECONDS,
                 priorityThreadFactory

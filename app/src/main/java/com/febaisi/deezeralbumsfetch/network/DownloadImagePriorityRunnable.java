@@ -9,7 +9,9 @@ import android.util.Log;
 
 import com.febaisi.deezeralbumsfetch.MainActivity;
 import com.febaisi.deezeralbumsfetch.R;
+import com.febaisi.deezeralbumsfetch.SharedPreferenceUtil;
 import com.febaisi.deezeralbumsfetch.cache.ImagesCache;
+import com.febaisi.deezeralbumsfetch.fragments.ConfigFragment;
 import com.febaisi.deezeralbumsfetch.network.threadpoolmanagement.Priority;
 import com.febaisi.deezeralbumsfetch.network.threadpoolmanagement.PriorityRunnable;
 
@@ -44,13 +46,17 @@ public class DownloadImagePriorityRunnable extends PriorityRunnable {
         try {
 
             Bitmap bMap = mImagesCache.getImageFromWarehouse(mCoverUrl);
+            boolean slowInternet = SharedPreferenceUtil.getBoolPref(mContext, ConfigFragment.INTERNET_SLOW_PREF);
 
-            if (bMap != null) {
+            if (bMap != null && !slowInternet) {
                 //Image loaded from cache. No need to store it in cache
                 Log.i(MainActivity.APP_TAG, "Image loaded from chace.");
                 notifyListener(false, bMap);
             } else {
-                Thread.sleep(4000);
+
+                if (slowInternet) {
+                    Thread.sleep(3000);
+                }
 
                 URL url = new URL(mCoverUrl);
                 InputStream in = url.openStream();

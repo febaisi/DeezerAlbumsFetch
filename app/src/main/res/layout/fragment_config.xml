@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/config_main_layout"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:text="@string/internet_slow" />
 
         <ToggleButton
@@ -34,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:text="@string/delete_cache" />
 
         <Button
@@ -43,6 +46,52 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="@string/wipe" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <Button
+            android:id="@+id/config_anim_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/save" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/config_anim_save">
+
+            <LinearLayout
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_width="0px"
+                android:layout_height="0px"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_centerVertical="true"
+                android:textSize="15sp"
+                android:text="@string/animation_desc" />
+
+            <EditText
+                android:id="@+id/config_anim_duration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:ems="10"
+                android:inputType="number"
+                android:layout_marginRight="15dp"
+                />
+
+        </LinearLayout>
+
     </RelativeLayout>
 
 

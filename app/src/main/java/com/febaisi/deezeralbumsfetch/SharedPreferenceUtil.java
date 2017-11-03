@@ -17,4 +17,18 @@ public class SharedPreferenceUtil {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getBoolean(key, false);
     }
+
+    public static int getIntPref(Context context, String key, int defaultValue) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getInt(key, defaultValue);
+    }
+
+    public static void putIntPref(Context context, String key, int value) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(key, value);
+        editor.commit();
+    }
+
+
 }

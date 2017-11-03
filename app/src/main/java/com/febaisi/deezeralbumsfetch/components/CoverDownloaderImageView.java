@@ -10,6 +10,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.febaisi.deezeralbumsfetch.R;
+import com.febaisi.deezeralbumsfetch.SharedPreferenceUtil;
+import com.febaisi.deezeralbumsfetch.fragments.ConfigFragment;
 import com.febaisi.deezeralbumsfetch.network.DownloadImagePriorityRunnable;
 import com.febaisi.deezeralbumsfetch.network.ImageDownloadListener;
 import com.febaisi.deezeralbumsfetch.network.threadpoolmanagement.DefaultExecutorSupplier;
@@ -78,6 +80,7 @@ public class CoverDownloaderImageView extends AppCompatImageView {
 
                 Animation fadeInAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.animation_fade_in);
                 fadeInAnimation.setFillAfter(true);
+                fadeInAnimation.setDuration(SharedPreferenceUtil.getIntPref(mContext, ConfigFragment.CONFIG_ANIM_TIME, 700));
                 startAnimation(fadeInAnimation);
             }
         });

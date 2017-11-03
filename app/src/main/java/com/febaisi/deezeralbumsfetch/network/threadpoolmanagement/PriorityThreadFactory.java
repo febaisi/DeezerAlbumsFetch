@@ -1,7 +1,11 @@
 package com.febaisi.deezeralbumsfetch.network.threadpoolmanagement;
 
-import java.util.concurrent.ThreadFactory;
 import android.os.Process;
+import android.util.Log;
+
+import com.febaisi.deezeralbumsfetch.MainActivity;
+
+import java.util.concurrent.ThreadFactory;
 
 public class PriorityThreadFactory implements ThreadFactory {
 
@@ -19,7 +23,7 @@ public class PriorityThreadFactory implements ThreadFactory {
                 try {
                     Process.setThreadPriority(mThreadPriority);
                 } catch (Throwable t) {
-
+                    Log.e(MainActivity.APP_TAG, "We got issues setting thread priority: " + t.getMessage());
                 }
                 runnable.run();
             }

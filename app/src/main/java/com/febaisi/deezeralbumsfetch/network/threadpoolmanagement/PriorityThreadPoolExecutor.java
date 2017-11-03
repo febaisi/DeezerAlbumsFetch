@@ -9,8 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 public class PriorityThreadPoolExecutor extends ThreadPoolExecutor {
 
-    public PriorityThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime,
-                                      TimeUnit unit, ThreadFactory threadFactory) {
+    public PriorityThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, ThreadFactory threadFactory) {
         super(corePoolSize, maximumPoolSize, keepAliveTime, unit,new PriorityBlockingQueue<Runnable>(), threadFactory);
     }
 
@@ -21,13 +20,13 @@ public class PriorityThreadPoolExecutor extends ThreadPoolExecutor {
         return futureTask;
     }
 
-    private static final class PriorityFutureTask extends FutureTask<PriorityRunnable>
-            implements Comparable<PriorityFutureTask> {
-        private final PriorityRunnable priorityRunnable;
+    private class PriorityFutureTask extends FutureTask<PriorityRunnable> implements Comparable<PriorityFutureTask> {
 
-        public PriorityFutureTask(PriorityRunnable priorityRunnable) {
-            super(priorityRunnable, null);
-            this.priorityRunnable = priorityRunnable;
+        private PriorityRunnable mPriorityRunnable;
+
+        public PriorityFutureTask(PriorityRunnable mPriorityRunnable) {
+            super(mPriorityRunnable, null);
+            this.mPriorityRunnable = mPriorityRunnable;
         }
 
         /*
@@ -40,8 +39,8 @@ public class PriorityThreadPoolExecutor extends ThreadPoolExecutor {
          */
         @Override
         public int compareTo(PriorityFutureTask other) {
-            Priority p1 = priorityRunnable.getPriority();
-            Priority p2 = other.priorityRunnable.getPriority();
+            Priority p1 = mPriorityRunnable.getPriority();
+            Priority p2 = other.mPriorityRunnable.getPriority();
             return p2.ordinal() - p1.ordinal();
         }
     }

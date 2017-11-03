@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.febaisi.deezeralbumsfetch.R;
-import com.febaisi.deezeralbumsfetch.cache.ImagesCache;
 
 public class AboutFragment extends CustomFragment {
 

@@ -29,10 +29,9 @@ public class FetchAlbumsAsyncTask extends AsyncTask<Void, Void, Pair<Boolean, St
         Boolean success = false;
 
         try {
-
             //My personal Deezer user -- 694058411
             //Test default user -- 2529
-            URL url = new URL("http://api.deezer.com/2.0/user/694058411/albums");
+            URL url = new URL("http://api.deezer.com/2.0/user/2529/albums");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setConnectTimeout(5000);
             connection.setReadTimeout(5000);

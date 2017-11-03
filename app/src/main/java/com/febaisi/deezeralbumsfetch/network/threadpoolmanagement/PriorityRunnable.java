@@ -1,6 +1,6 @@
 package com.febaisi.deezeralbumsfetch.network.threadpoolmanagement;
 
-public class PriorityRunnable implements Runnable {
+public abstract class PriorityRunnable implements Runnable {
 
     private final Priority priority;
 
@@ -9,9 +9,7 @@ public class PriorityRunnable implements Runnable {
     }
 
     @Override
-    public void run() {
-        // nothing to do here.
-    }
+    public abstract void run();
 
     public Priority getPriority() {
         return priority;

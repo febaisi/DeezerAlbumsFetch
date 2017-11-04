@@ -13,4 +13,5 @@
     <string name="wipe">Wipe</string>
     <string name="save">Save</string>
     <string name="enable">Enable</string>
+    <string name="about">Author: Felipe Baisi</string>
 </resources>

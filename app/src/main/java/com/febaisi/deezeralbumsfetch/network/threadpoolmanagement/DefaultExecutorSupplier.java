@@ -6,10 +6,9 @@ import java.util.concurrent.TimeUnit;
 
 public class DefaultExecutorSupplier{
 
-
-    public static final int NUMBER_OF_CORES = Runtime.getRuntime().availableProcessors();
-    private PriorityThreadPoolExecutor mNetworkThreadPoolExecutor;
+    private static final int NUMBER_OF_CORES = Runtime.getRuntime().availableProcessors();
     private static DefaultExecutorSupplier sInstance;
+    private PriorityThreadPoolExecutor mNetworkThreadPoolExecutor;
 
     public static DefaultExecutorSupplier getInstance() {
         if (sInstance == null) {

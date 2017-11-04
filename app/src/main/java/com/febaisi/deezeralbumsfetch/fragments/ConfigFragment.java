@@ -12,7 +12,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.febaisi.deezeralbumsfetch.R;
-import com.febaisi.deezeralbumsfetch.SharedPreferenceUtil;
+import com.febaisi.deezeralbumsfetch.sharedpreference.SharedPreferenceUtil;
 import com.febaisi.deezeralbumsfetch.cache.ImagesCache;
 
 public class ConfigFragment extends CustomFragment implements View.OnClickListener{

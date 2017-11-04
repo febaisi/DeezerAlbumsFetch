@@ -1,4 +1,4 @@
-package com.febaisi.deezeralbumsfetch;
+package com.febaisi.deezeralbumsfetch.sharedpreference;
 
 import android.content.Context;
 import android.content.SharedPreferences;

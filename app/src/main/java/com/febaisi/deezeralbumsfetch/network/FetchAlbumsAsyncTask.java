@@ -14,6 +14,12 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
+/**
+ * Exclusively class written to demonstrate knowledge about AsyncTask.
+ * It fetches the Deezer API URL (Albums)
+ * We could add this task as Runnable running under the ThreadPoolExecutor
+ */
+
 public class FetchAlbumsAsyncTask extends AsyncTask<Void, Void, Pair<Boolean, String>>  {
 
     private AlbumsFetchListener mAlbumsFetchListener;

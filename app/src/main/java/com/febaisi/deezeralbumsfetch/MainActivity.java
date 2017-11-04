@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            //Creating a new fragment everytime that you launch each section on purpose.
+            //Easier for testing.
             switch (item.getItemId()) {
                 case R.id.navigation_config:
                     manageFragment(new ConfigFragment());

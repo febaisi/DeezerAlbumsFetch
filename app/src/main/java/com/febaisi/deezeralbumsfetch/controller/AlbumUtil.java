@@ -9,6 +9,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AlbumUtil {
 
@@ -70,4 +72,24 @@ public class AlbumUtil {
         artist.setTracklist(artistJsonObject.getString("tracklist"));
         return artist;
     }
+
+    /**
+     * Return the cover id along with the image size as an ID.
+     * We can't rely on images URL as an ID because the base web service may change at some point
+     * @param coverUrl
+     * @return album cover id along with the image size
+     */
+    public static String getCoverId(String coverUrl) {
+        String result = "";
+
+        Pattern LEGAL_KEY_PATTERN = Pattern.compile("(cover|artist)\\/(.+?)-");
+        Matcher matcher = LEGAL_KEY_PATTERN.matcher(coverUrl);
+        if (matcher.find()) {
+            result = matcher.group(2);
+            result = result.replace("/", "-");
+        }
+
+        return result;
+    }
+
 }

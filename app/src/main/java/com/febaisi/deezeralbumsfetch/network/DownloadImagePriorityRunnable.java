@@ -9,8 +9,10 @@ import android.util.Log;
 
 import com.febaisi.deezeralbumsfetch.MainActivity;
 import com.febaisi.deezeralbumsfetch.R;
+import com.febaisi.deezeralbumsfetch.cache.DiskLruImageCache;
+import com.febaisi.deezeralbumsfetch.controller.AlbumUtil;
 import com.febaisi.deezeralbumsfetch.sharedpreference.SharedPreferenceUtil;
-import com.febaisi.deezeralbumsfetch.cache.ImagesCache;
+import com.febaisi.deezeralbumsfetch.cache.MemImageCache;
 import com.febaisi.deezeralbumsfetch.fragments.ConfigFragment;
 import com.febaisi.deezeralbumsfetch.network.threadpoolmanagement.Priority;
 import com.febaisi.deezeralbumsfetch.network.threadpoolmanagement.PriorityRunnable;
@@ -27,8 +29,10 @@ public class DownloadImagePriorityRunnable extends PriorityRunnable {
     private Context mContext;
     private String mCoverUrl;
     private String mAlbumTitle;
+    private String mCoverId;
     private ImageDownloadListener mImageDownloadListener;
-    private ImagesCache mImagesCache;
+    private MemImageCache mMemImageCache;
+    private DiskLruImageCache mDiskLruImageCache;
 
 
     public DownloadImagePriorityRunnable(Priority priority, boolean isArtist, Context context, String albumTitle, String coverUrl, ImageDownloadListener imageDownloadListener) {
@@ -38,19 +42,23 @@ public class DownloadImagePriorityRunnable extends PriorityRunnable {
         this.mCoverUrl = coverUrl;
         this.mAlbumTitle = albumTitle; // Used to debug
         this.mImageDownloadListener = imageDownloadListener;
-        mImagesCache = ImagesCache.getInstance();
+        //this.mMemImageCache = MemImageCache.getInstance();
+        this.mDiskLruImageCache = DiskLruImageCache.getInstance(context);
+        this.mCoverId = AlbumUtil.getCoverId(mCoverUrl);
     }
 
     @Override
     public void run() {
         try {
 
-            Bitmap bMap = mImagesCache.getImageFromWarehouse(mCoverUrl);
+            //Bitmap bMap = mMemImageCache.getImageFromWarehouse(mCoverUrl);
+            Bitmap bMap = mDiskLruImageCache.getBitmap(mCoverId);
             boolean slowInternet = SharedPreferenceUtil.getBoolPref(mContext, ConfigFragment.INTERNET_SLOW_PREF);
 
             if (bMap != null && !slowInternet) {
                 //Image loaded from cache. No need to store it back
                 notifyListener(false, bMap);
+                Log.i(MainActivity.APP_TAG, "Image loaded from cache");
             } else {
 
                 if (slowInternet) {
@@ -86,7 +94,8 @@ public class DownloadImagePriorityRunnable extends PriorityRunnable {
     private void notifyListener(boolean storeInCache, Bitmap bitmapResult) {
         if (bitmapResult != null) {
             if (storeInCache) {
-                mImagesCache.addImageToWarehouse(mCoverUrl, bitmapResult);
+                mDiskLruImageCache.put(mCoverId, bitmapResult);
+                        //.addImageToWarehouse(mCoverUrl, bitmapResult);
             }
             if (mImageDownloadListener!=null) {
                 mImageDownloadListener.onDrawableAvailable(mIsArtist, new BitmapDrawable(mContext.getResources(), bitmapResult));
@@ -95,4 +104,5 @@ public class DownloadImagePriorityRunnable extends PriorityRunnable {
             }
         }
     }
+
 }

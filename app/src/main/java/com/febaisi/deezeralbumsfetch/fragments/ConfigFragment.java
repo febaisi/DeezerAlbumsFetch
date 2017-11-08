@@ -13,7 +13,7 @@ import android.widget.ToggleButton;
 
 import com.febaisi.deezeralbumsfetch.R;
 import com.febaisi.deezeralbumsfetch.sharedpreference.SharedPreferenceUtil;
-import com.febaisi.deezeralbumsfetch.cache.ImagesCache;
+import com.febaisi.deezeralbumsfetch.cache.MemImageCache;
 
 public class ConfigFragment extends CustomFragment implements View.OnClickListener{
 
@@ -74,7 +74,7 @@ public class ConfigFragment extends CustomFragment implements View.OnClickListen
                 break;
             case R.id.config_delete_cache:
                 Toast.makeText(getContext(), "Cache deleted", Toast.LENGTH_SHORT).show();
-                ImagesCache.getInstance().clearCache();
+                MemImageCache.getInstance().clearCache();
                 break;
             case R.id.config_anim_save:
                 int newAnimationTime = Integer.parseInt(mAnimationEditText.getText().toString());

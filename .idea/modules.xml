@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/DeezerAlbumsFetch.iml" filepath="$PROJECT_DIR$/DeezerAlbumsFetch.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/deezeralbumsfetch.iml" filepath="$PROJECT_DIR$/deezeralbumsfetch.iml" />
     </modules>
   </component>
 </project>

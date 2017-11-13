@@ -10,6 +10,7 @@
     <string name="internet_slow">Internet slow (images)</string>
     <string name="delete_cache">Wipe cache</string>
     <string name="animation_desc">FadeIn Milisec</string>
+    <string name="cache_type">Cache type</string>
     <string name="wipe">Wipe</string>
     <string name="save">Save</string>
     <string name="enable">Enable</string>

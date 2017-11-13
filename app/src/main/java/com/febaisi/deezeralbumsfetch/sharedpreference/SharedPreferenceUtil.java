@@ -30,5 +30,16 @@ public class SharedPreferenceUtil {
         editor.commit();
     }
 
+    public static String getStringPref(Context context, String key, String defaultValue) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(key, defaultValue);
+    }
+
+    public static void putStringPref(Context context, String key, String value) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
 
 }

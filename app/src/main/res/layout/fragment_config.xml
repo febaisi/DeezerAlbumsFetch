@@ -18,6 +18,33 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp">
 
+            <com.febaisi.deezeralbumsfetch.widgethelper.CustomSpinner
+                android:id="@+id/config_cache_spinner"
+                style="@style/Widget.AppCompat.Spinner"
+                android:layout_marginRight="2dp"
+                android:layout_width="100dp"
+                android:layout_height="?attr/dropdownListPreferredItemHeight"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/spinner_bg"
+                android:popupBackground="@android:color/white"
+                android:stateListAnimator="@drawable/spinner_sla"
+                android:popupElevation="3dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_centerVertical="true"
+                android:textSize="15sp"
+                android:text="@string/cache_type" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

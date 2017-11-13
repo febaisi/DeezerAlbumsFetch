@@ -10,12 +10,12 @@ import android.util.Log;
 import com.febaisi.deezeralbumsfetch.MainActivity;
 import com.febaisi.deezeralbumsfetch.R;
 import com.febaisi.deezeralbumsfetch.cache.DiskLruImageCache;
-import com.febaisi.deezeralbumsfetch.controller.AlbumUtil;
-import com.febaisi.deezeralbumsfetch.sharedpreference.SharedPreferenceUtil;
 import com.febaisi.deezeralbumsfetch.cache.MemImageCache;
+import com.febaisi.deezeralbumsfetch.controller.AlbumUtil;
 import com.febaisi.deezeralbumsfetch.fragments.ConfigFragment;
 import com.febaisi.deezeralbumsfetch.network.threadpoolmanagement.Priority;
 import com.febaisi.deezeralbumsfetch.network.threadpoolmanagement.PriorityRunnable;
+import com.febaisi.deezeralbumsfetch.sharedpreference.SharedPreferenceUtil;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -42,8 +42,6 @@ public class DownloadImagePriorityRunnable extends PriorityRunnable {
         this.mCoverUrl = coverUrl;
         this.mAlbumTitle = albumTitle; // Used to debug
         this.mImageDownloadListener = imageDownloadListener;
-        //this.mMemImageCache = MemImageCache.getInstance();
-        this.mDiskLruImageCache = DiskLruImageCache.getInstance(context);
         this.mCoverId = AlbumUtil.getCoverId(mCoverUrl);
     }
 
@@ -51,13 +49,22 @@ public class DownloadImagePriorityRunnable extends PriorityRunnable {
     public void run() {
         try {
 
-            //Bitmap bMap = mMemImageCache.getImageFromWarehouse(mCoverUrl);
-            Bitmap bMap = mDiskLruImageCache.getBitmap(mCoverId);
+            Bitmap bitmap;
+
+            //Checking cache type
+            if (SharedPreferenceUtil.getStringPref(mContext, ConfigFragment.CONFIG_CACHE_TYPE, "").equals(ConfigFragment.CONFIG_CACHE_TYPE_MEM)) {
+                this.mMemImageCache = MemImageCache.getInstance();
+                bitmap = mMemImageCache.getImageFromWarehouse(mCoverUrl);
+            } else {
+                this.mDiskLruImageCache = DiskLruImageCache.getInstance(mContext);
+                bitmap = mDiskLruImageCache.getBitmap(mCoverId);
+            }
+
             boolean slowInternet = SharedPreferenceUtil.getBoolPref(mContext, ConfigFragment.INTERNET_SLOW_PREF);
 
-            if (bMap != null && !slowInternet) {
+            if (bitmap != null && !slowInternet) {
                 //Image loaded from cache. No need to store it back
-                notifyListener(false, bMap);
+                notifyListener(false, bitmap);
                 Log.i(MainActivity.APP_TAG, "Image loaded from cache");
             } else {
 
@@ -68,7 +75,7 @@ public class DownloadImagePriorityRunnable extends PriorityRunnable {
                 URL url = new URL(mCoverUrl);
                 InputStream in = url.openStream();
                 BufferedInputStream buf = new BufferedInputStream(in);
-                bMap = BitmapFactory.decodeStream(buf);
+                bitmap = BitmapFactory.decodeStream(buf);
 
                 if (in != null) {
                     in.close();
@@ -77,7 +84,7 @@ public class DownloadImagePriorityRunnable extends PriorityRunnable {
                     buf.close();
                 }
 
-                notifyListener(true, bMap);
+                notifyListener(true, bitmap);
             }
 
         } catch (MalformedURLException e) {
@@ -93,15 +100,22 @@ public class DownloadImagePriorityRunnable extends PriorityRunnable {
 
     private void notifyListener(boolean storeInCache, Bitmap bitmapResult) {
         if (bitmapResult != null) {
+
             if (storeInCache) {
-                mDiskLruImageCache.put(mCoverId, bitmapResult);
-                        //.addImageToWarehouse(mCoverUrl, bitmapResult);
+                if (mDiskLruImageCache != null) {
+                    mDiskLruImageCache.put(mCoverId, bitmapResult);
+                }
+                if (mMemImageCache != null) {
+                    mMemImageCache.addImageToWarehouse(mCoverUrl, bitmapResult);
+                }
             }
+
             if (mImageDownloadListener!=null) {
                 mImageDownloadListener.onDrawableAvailable(mIsArtist, new BitmapDrawable(mContext.getResources(), bitmapResult));
             } else {
                 mImageDownloadListener.onRequestFail(mContext.getString(R.string.cover_fetch_fail));
             }
+
         }
     }
 

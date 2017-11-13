@@ -9,7 +9,7 @@ public class MemImageCache {
     private static MemImageCache memImageCache;
 
     protected MemImageCache() {
-        // Exists only to defeat instantiation.
+        //Defeat singleton initialization
     }
 
     /**

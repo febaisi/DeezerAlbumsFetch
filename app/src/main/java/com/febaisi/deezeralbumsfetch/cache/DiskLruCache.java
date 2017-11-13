@@ -226,12 +226,7 @@ public final class DiskLruCache implements Closeable {
                 cache.processJournal();
                 return cache;
             } catch (IOException journalIsCorrupt) {
-                System.out
-                        .println("DiskLruCache "
-                                + directory
-                                + " is corrupt: "
-                                + journalIsCorrupt.getMessage()
-                                + ", removing");
+                //System.out.println("DiskLruCache " + directory  + " is corrupt: "  + journalIsCorrupt.getMessage() + ", removing");
                 cache.delete();
             }
         }
@@ -397,6 +392,9 @@ public final class DiskLruCache implements Closeable {
     private static void renameTo(File from, File to, boolean deleteDestination) throws IOException {
         if (deleteDestination) {
             deleteIfExists(to);
+        }
+        if (!from.exists() || !to.exists()) {
+            return;
         }
         if (!from.renameTo(to)) {
             throw new IOException();

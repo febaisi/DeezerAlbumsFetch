@@ -86,7 +86,7 @@ public class AlbumUtil {
         Matcher matcher = LEGAL_KEY_PATTERN.matcher(coverUrl);
         if (matcher.find()) {
             result = matcher.group(2);
-            result = result.replace("/", "-");
+            result = result.replace("/", "");
         }
 
         return result;

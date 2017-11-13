@@ -52,9 +52,9 @@ public class DownloadImagePriorityRunnable extends PriorityRunnable {
             Bitmap bitmap;
 
             //Checking cache type
-            if (SharedPreferenceUtil.getStringPref(mContext, ConfigFragment.CONFIG_CACHE_TYPE, "").equals(ConfigFragment.CONFIG_CACHE_TYPE_MEM)) {
+            if (SharedPreferenceUtil.getStringPref(mContext, ConfigFragment.CONFIG_CACHE_TYPE, ConfigFragment.CONFIG_CACHE_TYPE_FS).equals(ConfigFragment.CONFIG_CACHE_TYPE_MEM)) {
                 this.mMemImageCache = MemImageCache.getInstance();
-                bitmap = mMemImageCache.getImageFromWarehouse(mCoverUrl);
+                bitmap = mMemImageCache.getImageFromWarehouse(mCoverId);
             } else {
                 this.mDiskLruImageCache = DiskLruImageCache.getInstance(mContext);
                 bitmap = mDiskLruImageCache.getBitmap(mCoverId);
@@ -95,7 +95,10 @@ public class DownloadImagePriorityRunnable extends PriorityRunnable {
             Log.e(MainActivity.APP_TAG, "IOException");
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } catch (NullPointerException e) {
+            Log.e(MainActivity.APP_TAG, "NullPointerException " + e.toString());
         }
+
     }
 
     private void notifyListener(boolean storeInCache, Bitmap bitmapResult) {
@@ -106,7 +109,7 @@ public class DownloadImagePriorityRunnable extends PriorityRunnable {
                     mDiskLruImageCache.put(mCoverId, bitmapResult);
                 }
                 if (mMemImageCache != null) {
-                    mMemImageCache.addImageToWarehouse(mCoverUrl, bitmapResult);
+                    mMemImageCache.addImageToWarehouse(mCoverId, bitmapResult);
                 }
             }
 

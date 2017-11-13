@@ -75,9 +75,12 @@ public class ConfigFragment extends CustomFragment implements View.OnClickListen
             mSlowInternetToggleButton.toggle();
         }
 
-        if (SharedPreferenceUtil.getStringPref(getContext(), CONFIG_CACHE_TYPE, "") .equals("")) {
+        if (SharedPreferenceUtil.getStringPref(getContext(), CONFIG_CACHE_TYPE, CONFIG_CACHE_TYPE_FS) .equals(CONFIG_CACHE_TYPE_FS)) {
             //Set the default value for cache type
             SharedPreferenceUtil.putStringPref(getContext(), CONFIG_CACHE_TYPE, CONFIG_CACHE_TYPE_FS);
+            mCustomCacheSpinner.setSelection(0);
+        } else {
+            mCustomCacheSpinner.setSelection(1);
         }
     }
 
@@ -122,7 +125,7 @@ public class ConfigFragment extends CustomFragment implements View.OnClickListen
                 if (!selectedValue.equals(SharedPreferenceUtil.getStringPref(getContext(), CONFIG_CACHE_TYPE, ""))) {
                     SharedPreferenceUtil.putStringPref(getContext(), CONFIG_CACHE_TYPE, selectedValue);
                     deleteAllCache();
-                    Snackbar.make(mRootCoordinatorLayout, "New cache type set -- Cache wiped", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(mRootCoordinatorLayout, "New cache type set -- Both caches wiped", Snackbar.LENGTH_SHORT).show();
                 }
             }
         });
@@ -130,7 +133,7 @@ public class ConfigFragment extends CustomFragment implements View.OnClickListen
 
     private void deleteAllCache() {
         MemImageCache.getInstance().clearCache();
-        DiskLruImageCache.getInstance(getContext()).clearCache();
+        //DiskLruImageCache.getInstance(getContext()).clearCache();
     }
 
 }

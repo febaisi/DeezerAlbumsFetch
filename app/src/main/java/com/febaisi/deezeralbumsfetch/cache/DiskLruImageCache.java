@@ -147,6 +147,7 @@ public class DiskLruImageCache {
     public void clearCache() {
         try {
             mDiskCache.delete();
+            mDiskLruImageCache = null;
         } catch ( IOException e ) {
             e.printStackTrace();
         }

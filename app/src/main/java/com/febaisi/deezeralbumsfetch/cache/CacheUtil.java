@@ -62,6 +62,11 @@ public class CacheUtil {
                 throw new IOException("failed to delete file: " + file);
             }
         }
+        if (dir.exists()) {
+            if(!dir.delete()) {
+                throw new IOException("failed to delete file: " + dir);
+            }
+        }
     }
 
     static void closeQuietly(/*Auto*/Closeable closeable) {

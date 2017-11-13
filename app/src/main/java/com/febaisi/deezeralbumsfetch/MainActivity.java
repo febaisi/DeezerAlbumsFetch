@@ -76,12 +76,8 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        //Initialize Cache
-//        MemImageCache memImageCache = MemImageCache.getInstance();
-//        memImageCache.initializeCache();
-
-
-
+        MemImageCache memImageCache = MemImageCache.getInstance();
+        memImageCache.initializeCache();
 
         // If we're being restored from a previous state,
         // then we don't need to do anything and should return or else

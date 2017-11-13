@@ -10,12 +10,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.febaisi.deezeralbumsfetch.R;
-import com.febaisi.deezeralbumsfetch.sharedpreference.SharedPreferenceUtil;
 import com.febaisi.deezeralbumsfetch.fragments.ConfigFragment;
 import com.febaisi.deezeralbumsfetch.network.DownloadImagePriorityRunnable;
 import com.febaisi.deezeralbumsfetch.network.ImageDownloadListener;
 import com.febaisi.deezeralbumsfetch.network.threadpoolmanagement.DefaultExecutorSupplier;
 import com.febaisi.deezeralbumsfetch.network.threadpoolmanagement.Priority;
+import com.febaisi.deezeralbumsfetch.sharedpreference.SharedPreferenceUtil;
 
 
 public class CoverDownloaderImageView extends AppCompatImageView {

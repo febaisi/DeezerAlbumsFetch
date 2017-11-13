@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.febaisi.deezeralbumsfetch.cache.DiskLruImageCache;
 import com.febaisi.deezeralbumsfetch.cache.MemImageCache;
 import com.febaisi.deezeralbumsfetch.fragments.AboutFragment;
 import com.febaisi.deezeralbumsfetch.fragments.AlbumsFragment;

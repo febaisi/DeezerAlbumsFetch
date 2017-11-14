@@ -4,18 +4,16 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.util.Log;
+
+import com.febaisi.deezeralbumsfetch.MainActivity;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-/**
- * Created by baisfe01 on 11/8/17.
- */
 
 public class DiskLruImageCache {
 
@@ -46,8 +44,7 @@ public class DiskLruImageCache {
         return mDiskLruImageCache;
     }
 
-    private boolean writeBitmapToFile( Bitmap bitmap, DiskLruCache.Editor editor )
-            throws IOException, FileNotFoundException {
+    private boolean writeBitmapToFile(Bitmap bitmap, DiskLruCache.Editor editor) throws IOException {
         OutputStream out = null;
         try {
             out = new BufferedOutputStream( editor.newOutputStream( 0 ), CacheUtil.IO_BUFFER_SIZE );
@@ -72,16 +69,16 @@ public class DiskLruImageCache {
         return new File(cachePath + File.separator + uniqueName);
     }
 
-    public void put( String key, Bitmap data ) {
-
+    public void put(String key, Bitmap data) {
         DiskLruCache.Editor editor = null;
+
         try {
             editor = mDiskCache.edit( key );
-            if ( editor == null ) {
+            if (editor == null) {
                 return;
             }
 
-            if( writeBitmapToFile( data, editor ) ) {
+            if (writeBitmapToFile( data, editor)) {
                 mDiskCache.flush();
                 editor.commit();
             } else {
@@ -89,60 +86,58 @@ public class DiskLruImageCache {
             }
         } catch (IOException e) {
             try {
-                if ( editor != null ) {
+                if (editor != null) {
                     editor.abort();
                 }
             } catch (IOException ignored) {
+                Log.e(MainActivity.APP_TAG, "IOException: " + ignored.getMessage());
             }
         }
-
     }
 
-    public Bitmap getBitmap( String key ) {
+    public Bitmap getBitmap(String key) {
 
         Bitmap bitmap = null;
         DiskLruCache.Snapshot snapshot = null;
-        try {
 
-            snapshot = mDiskCache.get( key );
-            if ( snapshot == null ) {
+        try {
+            snapshot = mDiskCache.get(key);
+            if (snapshot == null) {
                 return null;
             }
+
             final InputStream in = snapshot.getInputStream( 0 );
-            if ( in != null ) {
-                final BufferedInputStream buffIn =
-                        new BufferedInputStream( in, CacheUtil.IO_BUFFER_SIZE );
+            if (in != null) {
+                final BufferedInputStream buffIn = new BufferedInputStream( in, CacheUtil.IO_BUFFER_SIZE );
                 bitmap = BitmapFactory.decodeStream( buffIn );
             }
-        } catch ( IOException e ) {
+        } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if ( snapshot != null ) {
+            if (snapshot != null) {
                 snapshot.close();
             }
         }
 
         return bitmap;
-
     }
 
     public boolean containsKey( String key ) {
-
+        //Let's keep this method for this test
         boolean contained = false;
         DiskLruCache.Snapshot snapshot = null;
         try {
-            snapshot = mDiskCache.get( key );
+            snapshot = mDiskCache.get(key);
             contained = snapshot != null;
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if ( snapshot != null ) {
+            if (snapshot != null) {
                 snapshot.close();
             }
         }
 
         return contained;
-
     }
 
     public void clearCache() {

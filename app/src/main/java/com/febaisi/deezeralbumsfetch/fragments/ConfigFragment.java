@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ToggleButton;
 
 import com.febaisi.deezeralbumsfetch.R;
+import com.febaisi.deezeralbumsfetch.cache.DiskLruImageCache;
 import com.febaisi.deezeralbumsfetch.cache.MemImageCache;
 import com.febaisi.deezeralbumsfetch.sharedpreference.SharedPreferenceUtil;
 import com.febaisi.deezeralbumsfetch.widgethelper.CustomSpinner;
@@ -132,7 +133,7 @@ public class ConfigFragment extends CustomFragment implements View.OnClickListen
 
     private void deleteAllCache() {
         MemImageCache.getInstance().clearCache();
-        //DiskLruImageCache.getInstance(getContext()).clearCache();
+        DiskLruImageCache.getInstance(getContext()).clearCache();
     }
 
 }

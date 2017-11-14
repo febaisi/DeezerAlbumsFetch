@@ -9,6 +9,7 @@ In a nutshell, this project describe how to use below features without using ext
 - PriorityThreadPoolExecutor - A ThreadPoolExecutor implementation. Manage a group of tasks based on availables processor and tasks prioritization. 
 - Image View Downloader - A ImageView with a placeholder while the defined URL image is being downloaded. I've also added an animation to displays the image when it get's loaded. 
 - API Request -  A basic network request using Async Task.
+- Dropdown button - Drop down list for a button. Used to choose the cache type.
 
 Demo: 
 
